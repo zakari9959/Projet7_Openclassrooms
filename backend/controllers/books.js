@@ -122,18 +122,14 @@ exports.ratingBook = (req, res, next) => {
   })
 }
 
-exports.bestThreeBooks = (req, res, next) => {
-  Book.find()
-    .sort({ averageRating: -1 })
-    .limit(3)
-    .exec((err, book) => {
-      if (err) {
-        console.error(err)
-        return res.status(500).json({
-          error: "Une erreur s'est produite lors de la récupération des livres",
-        })
-      }
-      console.log(book)
-      res.status(200).json(book)
+exports.bestThreeBooks = async (req, res, next) => {
+  try {
+    const books = await Book.find().sort({ averageRating: -1 }).limit(3)
+    res.status(200).json(books)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({
+      error: "Une erreur s'est produite lors de la récupération des livres",
     })
+  }
 }
