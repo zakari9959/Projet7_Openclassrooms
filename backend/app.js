@@ -5,9 +5,11 @@ const path = require('path')
 const booksRoutes = require('./routes/books')
 const userRoutes = require('./routes/user')
 
+// Création de l'application Express
 const app = express()
 const memoryStorage = []
 
+// Configuration de la connexion à la base de données MongoDB
 require('dotenv').config()
 const MongoUserName = process.env.MONGO_USER_NAME
 const MongoMdp = process.env.MONGO_MDP
@@ -19,8 +21,11 @@ mongoose
   )
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch((error) => console.log(error))
+
+// Utilisation de JSON pour les requêtes entrantes
 app.use(express.json())
 
+// Configuration des en-têtes CORS
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader(
@@ -36,7 +41,10 @@ app.use((req, res, next) => {
   next()
 })
 
+// Configuration des routes statiques pour les images
 app.use('/images', express.static(path.join(__dirname, 'images')))
+
+// Configuration des routes pour les livres et l'authentification
 app.use('/api/books', booksRoutes)
 app.use('/api/auth', userRoutes)
 
