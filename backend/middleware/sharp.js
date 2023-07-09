@@ -20,6 +20,7 @@ const sharpCompressResize = async (req, res, next) => {
 
   // Compression et redimensionnement de l'image en utilisant Sharp et l'enregistre dans le dossier "images"
   await sharp(buffer)
+    .resize({ width: 400, height: 500 })
     .webp({ quality: 80 }) // Convertit l'image en format WebP avec une qualité de 80%
     .toFile('./images/' + ref)
 
