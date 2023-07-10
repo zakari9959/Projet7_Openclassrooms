@@ -14,7 +14,7 @@ const sharpCompressResize = async (req, res, next) => {
   const { buffer, originalname } = req.file
 
   // Génère un nom de fichier unique en utilisant la date et le nom original de l'image
-  const timestamp = new Date().toISOString()
+  const timestamp = new Date.now()
   const nameWithoutExtension = originalname.split('.')[0]
   const ref = `${timestamp}-${nameWithoutExtension}.webp`
 
