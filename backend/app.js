@@ -7,6 +7,8 @@ const userRoutes = require('./routes/user')
 
 // Création de l'application Express
 const app = express()
+
+// INUTILE?
 const memoryStorage = []
 
 // Configuration de la connexion à la base de données MongoDB
